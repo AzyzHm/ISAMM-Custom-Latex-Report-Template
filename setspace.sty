@@ -1,0 +1,166 @@
+\@ifundefined{NeedsTeXFormat}{
+\def \filename {setspace.sty}
+\def \filedate {2000/12/01}
+\def \fileversion {6.7a}
+\typeout {Package: `setspace' \fileversion\space <\filedate>}
+}{
+\NeedsTeXFormat {LaTeX2e}[1994/12/01]
+\ProvidesPackage {setspace}[2011/12/19 v6.7a set line spacing]
+}
+
+\newcommand{\displayskipstretch}{\baselinestretch}
+\newcommand{\setdisplayskipstretch}[1]{\renewcommand{\displayskipstretch}{#1}}
+\DeclareOption{nodisplayskipstretch}{\setdisplayskipstretch{1.0}}
+
+\DeclareOption{singlespacing}{\AtEndOfPackage{\singlespacing}}
+\DeclareOption{onehalfspacing}{\AtEndOfPackage{\onehalfspacing}}
+\DeclareOption{doublespacing}{\AtEndOfPackage{\doublespacing}}
+
+\ProcessOptions
+
+\newcommand{\setstretch}[1]{%
+  \def\baselinestretch{#1}%
+  \@currsize
+}
+
+\newcommand{\SetSinglespace}[1]{%
+  \def\setspace@singlespace{#1}%
+}
+
+\SetSinglespace{1}
+
+\newcommand{\singlespacing}{%
+  \setstretch {\setspace@singlespace}
+  \vskip \baselineskip
+}
+
+\newcommand{\onehalfspacing}{
+  \setstretch{1.25}
+  \ifcase \@ptsize \relax
+    \setstretch {1.25}
+  \or
+    \setstretch {1.213}
+  \or
+    \setstretch {1.241}
+  \fi
+}
+
+\newcommand{\doublespacing}{
+  \setstretch {1.667}
+  \ifcase \@ptsize \relax
+    \setstretch {1.667}
+  \or
+    \setstretch {1.618}
+  \or
+    \setstretch {1.655}
+  \fi
+}
+
+\@ifundefined{NeedsTeXFormat}{
+\def\@setsize#1#2#3#4{
+  \@nomath#1
+  \let\@currsize#1
+  \baselineskip #2
+  \baselineskip \baselinestretch\baselineskip
+  \parskip \baselinestretch\parskip
+  \setbox\strutbox \hbox{
+    \vrule height.7\baselineskip
+           depth.3\baselineskip
+           width\z@}
+  \skip\footins \baselinestretch\skip\footins
+  \normalbaselineskip\baselineskip#3#4}
+}{}
+
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{
+  \latex@xfloat #1[#2]
+  \def\baselinestretch{\setspace@singlespace}
+  \normalsize
+}
+
+\long\def\@footnotetext#1{
+  \insert\footins{
+    \def\baselinestretch {\setspace@singlespace}
+    \reset@font\footnotesize
+    \interlinepenalty\interfootnotelinepenalty
+    \splittopskip\footnotesep
+    \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+    \hsize\columnwidth
+    \@parboxrestore
+    \protected@edef\@currentlabel{
+      \csname p@footnote\endcsname\@thefnmark
+    }
+    \color@begingroup
+      \@makefntext{
+        \rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}
+    \color@endgroup}}
+
+\long\def\@mpfootnotetext#1{
+  \global\setbox\@mpfootins\vbox{
+    \unvbox \@mpfootins
+    \def\baselinestretch {\setspace@singlespace}
+    \reset@font\footnotesize
+    \hsize\columnwidth
+    \@parboxrestore
+    \protected@edef\@currentlabel{
+      \csname p@mpfootnote\endcsname\@thefnmark}
+    \color@begingroup
+      \@makefntext{
+       \rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}
+   \color@endgroup}}
+
+\newenvironment{singlespace}{
+  \vskip \baselineskip
+  \setstretch {\setspace@singlespace}
+  \vskip -\baselineskip
+}{
+  \par
+}
+
+\newenvironment{singlespace*}{
+  \setstretch {\setspace@singlespace}
+  \vskip -\baselineskip
+}{
+  \vskip -0.5\baselineskip
+}
+
+\newcommand{\restore@spacing}{
+    \par
+    \vskip \parskip
+    \vskip \baselineskip
+  \endgroup
+  \vskip -\parskip
+  \vskip -\baselineskip
+}
+
+\newenvironment{spacing}[1]{
+  \par
+  \begingroup
+    \setstretch {#1}
+}{
+  \restore@spacing
+}
+
+\newenvironment{onehalfspace}{
+  \begingroup
+    \onehalfspacing
+}{
+  \restore@spacing
+}
+
+\newenvironment{doublespace}{
+  \begingroup
+    \doublespacing
+}{
+  \restore@spacing
+}
+
+\everydisplay\expandafter{
+  \the\everydisplay
+  \abovedisplayskip \displayskipstretch\abovedisplayskip
+  \belowdisplayskip \displayskipstretch\belowdisplayskip
+  \abovedisplayshortskip \displayskipstretch\abovedisplayshortskip
+  \belowdisplayshortskip \displayskipstretch\belowdisplayshortskip
+}
+
+\endinput

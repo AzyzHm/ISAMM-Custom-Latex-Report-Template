@@ -1,0 +1,102 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+
+\usepackage[pdftex]{graphicx}
+\graphicspath{{Figures/}}
+\usepackage[hidelinks]{hyperref}
+\usepackage[french]{varioref}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{amsmath}
+\usepackage{ifpdf}
+\usepackage{array}
+\usepackage{titlesec}
+
+\definecolor{sectionblue}{RGB}{24,61,93}
+\definecolor{subsectionblue}{RGB}{52,105,145}
+\definecolor{subsubsectionblue}{RGB}{91,145,181}
+
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\alph{subsubsection}}
+
+\titleformat{\chapter}[hang]
+  {\normalfont\Huge\bfseries\color{sectionblue}}
+  {\chaptername\ \thechapter\ :}{0.5em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{30pt}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{0.75em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{subsectionblue}}
+  {\thesubsection}{0.75em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{subsubsectionblue}}
+  {\thesubsubsection}{0.75em}{}
+
+
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\fancyhead[L]{\nouppercase\leftmark}
+\fancyhead[C]{}
+\fancyhead[R]{\nouppercase\rightmark}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{\textbf{\thepage}}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[R]{\textbf{\thepage}}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0.4pt}%
+}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+\include{garde_fin}
+
+\newpage
+\hypersetup{pageanchor=true}
+\pagenumbering{roman}
+\include{Dedicaces}
+\include{Dedicace2}
+\include{Remerciements}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\newpage
+\pagenumbering{arabic}
+\include{Introduction}
+\include{Chapter1}
+
+\include{Chapter2}
+
+\include{Chapter3}
+
+\include{Chapter4}
+
+\include{Conclusion}
+
+\bibliographystyle{alpha}
+\bibliography{bibliography}
+\addcontentsline{toc}{chapter}{Bibliographie}
+\pagestyle{empty}
+
+\renewcommand{\listtablename}{Tables}
+
+\end{document}
