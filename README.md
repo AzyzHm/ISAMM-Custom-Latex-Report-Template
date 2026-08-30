@@ -52,10 +52,9 @@ Open `Main.tex` to see how files are included and to understand the complete doc
 
 ## Getting started
 
-### Option 1: Overleaf
+### Option 1: Overleaf / Prism
 
-1. Create a new project and upload this repository's contents (or import
-   it directly from GitHub).
+1. Create a new project and upload this repository's contents.
 2. Set the main file to the entry point listed in `Main.tex`.
 3. Click Compile.
 
@@ -88,6 +87,10 @@ pdflatex Main.tex
   format and cite them with `\cite{key}`.
 - **Styling**: fonts, margins, colors, and header/footer formatting are
   set near the top of the main file.
+
+## Just want the files?
+
+If you do not need the repository documentation, grab the [v1.0.0 release](https://github.com/AzyzHm/ISAMM-Custom-Latex-Report-Template/releases/tag/v1.0.0) instead. It is a clean copy of the template with only the LaTeX files, ready to upload straight to Overleaf or Prism, or to compile locally.
 
 ## Contributing
 
